@@ -112,7 +112,7 @@ describe('Family Tree', () => {
       const szwajkowskis = new FamilyTree('Pop');
       szwajkowskis.insert('Mike');
       const mikeNode = szwajkowskis.findMember('Mike');
-
+      console.log('mikeNode: ', mikeNode)
       expect(mikeNode instanceof FamilyTree).toEqual(true);
     });
   });
