@@ -3,6 +3,7 @@ class FamilyTree {
     if (typeof name === 'string'){
     this.value = name;
     this.children = [];
+    this.dashes = '--';
     } else {
       throw 'error';
     }
@@ -23,13 +24,21 @@ class FamilyTree {
   findMember(memberName) {
     console.log('this is: ', this)
     if (this.value === memberName) return this;
-    for (let i = 0; i< this.children.length; i++){
+    for (let i = 0; i < this.children.length; i++){
       return this.children[i].findMember(this.children[i].value);
     }
       return undefined;
   }
 
   log () {
+
+    console.log('this is: ', this)
+    if (this.children.length === 0) return `${this.dashes}${this.value}`;
+    for (let i = 0; i < this.children.length; i++){
+      this.dashes = this.dashes + '-';
+      return this.children[i].log();
+    }
+      return undefined;
 
   }
  

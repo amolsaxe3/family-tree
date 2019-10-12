@@ -115,6 +115,40 @@ describe('Family Tree', () => {
       console.log('mikeNode: ', mikeNode)
       expect(mikeNode instanceof FamilyTree).toEqual(true);
     });
+
+    test('If a member does exist, returns that members node.', () => {
+      const szwajkowskis = new FamilyTree('Pop');
+      szwajkowskis.insert('Mike');
+      szwajkowskis.insert('Amy');
+      const mike = szwajkowskis.children[0];
+      mike.insert('Cas');
+      const casNode = szwajkowskis.findMember('Cas');
+      console.log('casNode: ', casNode)
+      expect(casNode instanceof FamilyTree).toEqual(true);
+    });
+
+    test('If a member does exist, returns that members node.', () => {
+      const szwajkowskis = new FamilyTree('Pop');
+
+      szwajkowskis.insert('Mike');
+      szwajkowskis.insert('Amy');
+      szwajkowskis.insert('Todd');
+
+      const mikesFamily = szwajkowskis.findMember('Mike');
+
+      mikesFamily.insert('Eliot');
+      mikesFamily.insert('Elise');
+      mikesFamily.insert('Cas');
+      mikesFamily.insert('George');
+      mikesFamily.insert('Lear');
+
+      const amysFamily = szwajkowskis.findMember('Amy');
+
+      amysFamily.insert('Henry');
+      amysFamily.insert('Vivian');
+      const henryNode = szwajkowskis.findMember('Henry');
+      expect(henryNode instanceof FamilyTree).toEqual(true);
+    });
   });
 
   test('Has a log method.', () => {
@@ -154,7 +188,7 @@ describe('Family Tree', () => {
 
       expect(
         log.indexOf(
-          `-- Pop
+`-- Pop
 ---- Mike
 ------ Eliot
 ------ Elise
