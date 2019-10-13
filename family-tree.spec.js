@@ -120,8 +120,11 @@ describe('Family Tree', () => {
       const szwajkowskis = new FamilyTree('Pop');
       szwajkowskis.insert('Mike');
       szwajkowskis.insert('Amy');
+      console.log('szwajkowskis here: ', szwajkowskis)
       const mike = szwajkowskis.children[0];
+      console.log('mike is: ', mike)
       mike.insert('Cas');
+      console.log('mike after insertion: ', mike)
       const casNode = szwajkowskis.findMember('Cas');
       console.log('casNode: ', casNode)
       expect(casNode instanceof FamilyTree).toEqual(true);
@@ -185,6 +188,8 @@ describe('Family Tree', () => {
       amysFamily.insert('Vivian');
 
       const log = szwajkowskis.log();
+
+      console.log('===>log variable===>',log);
 
       expect(
         log.indexOf(

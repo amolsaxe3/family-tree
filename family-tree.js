@@ -4,6 +4,7 @@ class FamilyTree {
     this.value = name;
     this.children = [];
     this.dashes = '--';
+    this.family = '';
     } else {
       throw 'error';
     }
@@ -22,26 +23,43 @@ class FamilyTree {
   }
 
   findMember(memberName) {
-    console.log('this is: ', this)
+    // console.log('this---->', JSON.stringify(this, null, 2) + 'memberName---->'+ memberName)
     if (this.value === memberName) return this;
+    let famTreeIfFound = undefined;
     for (let i = 0; i < this.children.length; i++){
-      return this.children[i].findMember(this.children[i].value);
+      const objFamTree = this.children[i]
+      // console.log('objFamTree: outside if check but inside for', this.children[i])
+      if (objFamTree.value === memberName) {
+        // console.log('objFamTree: inside true condition ', this.children[i])
+        famTreeIfFound = objFamTree
+      } else {
+        // console.log ('inside else cond--->');
+        if (objFamTree.children.length > 0) { famTreeIfFound = objFamTree.findMember(memberName);}
+      }
+      // return this.children[i].findMember(this.children[i].value);
     }
-      return undefined;
+      return famTreeIfFound;
   }
+  
+  log (finalString = '', dashes = '') {
+    console.log('finalString/dashes beginnig of LOG fn() return===>', finalString, '====dashes===>', dashes);
+        dashes += '--';
+        if (finalString === '') {
+          finalString += `${dashes} ${this.value}`;
+        }
+      if (this.children.length > 0){  
+        dashes += '--';
+        for (let i = 0; i < this.children.length; i++) {
+          finalString +=  `\n${dashes} ${this.children[i].value}`
+          finalString = this.children[i].log(finalString, this.dashes)
 
-  log () {
+        }
+      } 
 
-    console.log('this is: ', this)
-    if (this.children.length === 0) return `${this.dashes}${this.value}`;
-    for (let i = 0; i < this.children.length; i++){
-      this.dashes = this.dashes + '-';
-      return this.children[i].log();
-    }
-      return undefined;
-
+    console.log('finalString before return===>',finalString)
+    return finalString;
   }
- 
+  
  }
 
 module.exports = FamilyTree;
