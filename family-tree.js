@@ -43,7 +43,6 @@ class FamilyTree {
   
   log (finalString = '', dashes = '') {
     console.log('finalString/dashes beginnig of LOG fn() return===>', finalString, '====dashes===>', dashes);
-
         if (finalString === '') {
           dashes += '--';
           finalString += `${dashes} ${this.value}`;
@@ -53,7 +52,6 @@ class FamilyTree {
         for (let i = 0; i < this.children.length; i++) {
           finalString +=  `\n${dashes} ${this.children[i].value}`
           finalString = this.children[i].log(finalString, dashes)
-
         }
       } 
 
